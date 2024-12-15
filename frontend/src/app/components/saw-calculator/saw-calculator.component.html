@@ -1,0 +1,88 @@
+<div class="app-container">
+  <div class="card">
+    <h2 class="title">Calculadora SAW</h2>
+
+    <!-- Sección Criterios -->
+    <div class="section">
+      <h3>Criterios</h3>
+      <div class="criteria-list">
+        <div *ngFor="let criterion of criteria; let i = index" class="input-group">
+          <input
+            [(ngModel)]="criterion.name"
+            placeholder="Nombre del criterio"
+            class="input-text"
+          >
+          <input
+            type="number"
+            [(ngModel)]="criterion.weight"
+            placeholder="0"
+            class="input-number"
+          >
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="criterion.is_cost"
+              class="checkbox"
+            >
+            <span>Es Costo</span>
+          </label>
+          <button (click)="removeCriteria(i)" class="delete-btn">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
+      <button (click)="addCriteria()" class="add-btn">
+        <span class="material-icons">add</span>
+        Agregar Criterio
+      </button>
+    </div>
+
+    <!-- Sección Alternativas -->
+    <div class="section">
+      <h3>Alternativas</h3>
+      <div class="alternatives-list">
+        <div *ngFor="let alternative of alternatives; let i = index" class="input-group">
+          <input
+            [(ngModel)]="alternative.name"
+            placeholder="Nombre de la alternativa"
+            class="input-text"
+          >
+          <input
+            *ngFor="let value of alternative.values; let j = index"
+            type="number"
+            [(ngModel)]="alternative.values[j]"
+            placeholder="0"
+            class="input-number"
+          >
+          <button (click)="removeAlternative(i)" class="delete-btn">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
+      <button (click)="addAlternative()" class="add-btn">
+        <span class="material-icons">add</span>
+        Agregar Alternativa
+      </button>
+    </div>
+
+    <!-- Botón Calcular -->
+    <button (click)="calculate()" class="calculate-btn">
+      <span class="material-icons">calculate</span>
+      Calcular
+    </button>
+
+    <!-- Resultados -->
+    <div *ngIf="result" class="results-section">
+      <h3>Resultados</h3>
+      <div class="results-list">
+        <div *ngFor="let ranking of result.rankings" class="result-item">
+          <span>{{ranking.rank}}. {{ranking.name}}</span>
+          <span class="score">{{ranking.score | number:'1.4-4'}}</span>
+        </div>
+        <div class="best-alternative">
+          Mejor alternativa: {{result.best_alternative}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
