@@ -1,0 +1,119 @@
+<div class="container mx-auto p-4">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-2xl mb-6">Calculadora Simplex</h2>
+  
+      <!-- Configuración -->
+      <div class="mb-4">
+        <div class="flex gap-4 mb-4">
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Número de Variables
+            </label>
+            <input
+              type="number"
+              [(ngModel)]="numVariables"
+              (change)="updateSize()"
+              min="1"
+              class="border rounded p-2 w-24"
+            >
+          </div>
+  
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Número de Restricciones
+            </label>
+            <input
+              type="number"
+              [(ngModel)]="numConstraints"
+              (change)="updateSize()"
+              min="1"
+              class="border rounded p-2 w-24"
+            >
+          </div>
+  
+          <label class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              [(ngModel)]="isMaximization"
+              [checked]="isMaximization"
+              class="rounded"
+            >
+            <span>Maximización</span>
+          </label>
+        </div>
+  
+        <!-- Función Objetivo -->
+        <div class="mb-6">
+          <h3 class="text-xl mb-4">Función Objetivo</h3>
+          <div class="flex gap-4 items-center">
+            <ng-container *ngFor="let coef of objectiveFunction; let i = index">
+              <input
+                type="number"
+                [(ngModel)]="objectiveFunction[i]"
+                class="border rounded p-2 w-24"
+              >
+              <span>x{{i + 1}}</span>
+              <span *ngIf="i < objectiveFunction.length - 1">+</span>
+            </ng-container>
+          </div>
+        </div>
+  
+        <!-- Restricciones -->
+        <div class="mb-6">
+          <h3 class="text-xl mb-4">Restricciones</h3>
+          <div *ngFor="let row of constraints; let i = index" class="flex gap-4 items-center mb-4">
+            <ng-container *ngFor="let coef of row; let j = index">
+              <input
+                type="number"
+                [(ngModel)]="constraints[i][j]"
+                class="border rounded p-2 w-24"
+              >
+              <span>x{{j + 1}}</span>
+              <span *ngIf="j < row.length - 1">+</span>
+            </ng-container>
+            <select [(ngModel)]="signs[i]" class="border rounded p-2">
+              <option value="<=">≤</option>
+              <option value=">=">≥</option>
+              <option value="=">=</option>
+            </select>
+            <input
+              type="number"
+              [(ngModel)]="rightHandSide[i]"
+              class="border rounded p-2 w-24"
+            >
+          </div>
+        </div>
+  
+        <button
+          (click)="solve()"
+          class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600"
+        >
+        <span class="material-icons">calculate</span> Calcular
+        </button>
+      </div>
+  
+      <!-- Resultados -->
+      <div *ngIf="result" class="mt-8">
+        <h3 class="text-xl mb-4">Resultados</h3>
+        <div class="space-y-2">
+          <div class="flex justify-between border-b py-2">
+            <span>Estado:</span>
+            <span>{{result.status}}</span>
+          </div>
+          <div class="flex justify-between border-b py-2">
+            <span>Valor óptimo:</span>
+            <span>{{result.objectiveValue | number:'1.4-4'}}</span>
+          </div>
+          <div *ngFor="let value of result.solution; let i = index" 
+               class="flex justify-between border-b py-2">
+            <span>x{{i + 1}}:</span>
+            <span>{{value | number:'1.4-4'}}</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span>Iteraciones:</span>
+            <span>{{result.iterations}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
