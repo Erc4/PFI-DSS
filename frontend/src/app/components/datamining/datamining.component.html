@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Predictor de Calidad de Vino</h2>
+  
+    <!-- Información del Dataset -->
+    <div *ngIf="datasetInfo" class="dataset-info">
+      <h3>Información del Dataset</h3>
+      <p>Total de Muestras: {{ datasetInfo.total_samples }}</p>
+      <p>Valores de Calidad: {{ datasetInfo.target.unique_values.join(', ') }}</p>
+    </div>
+  
+    <!-- Botón de Entrenamiento -->
+    <button (click)="trainModel()" class="train-btn">Entrenar Modelo</button>
+    <p *ngIf="trainingStatus">{{ trainingStatus }}</p>
+  
+    <!-- Formulario de Características -->
+    <div class="features-form">
+      <h3>Introduce Características del Vino</h3>
+      <div *ngFor="let feature of featureNames; let i = index" class="feature-input">
+        <label>{{ feature }}:</label>
+        <input 
+          type="number" 
+          step="0.01" 
+          [(ngModel)]="features[i]" 
+          [name]="feature"
+        >
+      </div>
+      <button (click)="predict()" class="predict-btn">Predecir Calidad</button>
+    </div>
+  
+    <!-- Resultado de Predicción -->
+    <div *ngIf="prediction" class="prediction-result">
+      <h3>Predicción de Calidad:</h3>
+      <p>{{ prediction }}</p>
+      <p *ngIf="predictionStatus">{{ predictionStatus }}</p>
+    </div>
+  </div>
