@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Perceptrón Simple - Predicción de Calidad de Vino</h2>
+  
+    <!-- Formulario de Entrenamiento -->
+    <div class="training-section">
+      <h3>Entrenar Perceptrón</h3>
+      <button (click)="trainModel()">Entrenar Modelo</button>
+      <p *ngIf="trainingStatus">{{ trainingStatus }}</p>
+    </div>
+  
+    <!-- Formulario de Predicción -->
+    <div class="prediction-section">
+      <h3>Predecir Calidad de Vino</h3>
+      <form [formGroup]="form">
+        <div *ngFor="let feature of featureNames; let i = index" class="feature-input">
+          <label>{{ feature }}:</label>
+          <input
+            type="number"
+            step="0.01"
+            [formControl]="featureControls[i]"
+            [name]="'feature-' + i"
+          >
+        </div>
+        <button (click)="predict()">Predecir Calidad</button>
+      </form>
+      <div class="prediction-result" *ngIf="prediction !== null">
+        <p>Predicción: {{ prediction === 1 ? 'Vino de Alta Calidad' : 'Vino de Baja Calidad' }}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "DREOiKENgMqngMUMKFasVgXv/lq69GFr2DvL0YKHEsk=",
+  "Source": "perceptron-service",
+  "BasePath": "_content/perceptron-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

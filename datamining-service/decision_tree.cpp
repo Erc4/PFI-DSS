@@ -1,10 +1,14 @@
+#pragma once
 #include <vector>
 #include <string>
 #include <memory>
 #include <algorithm>
 #include <cmath>
 #include <unordered_map>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
+namespace py = pybind11;
 class DecisionTreeNode
 {
 public:
