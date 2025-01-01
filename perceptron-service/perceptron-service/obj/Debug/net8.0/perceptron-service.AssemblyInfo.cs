@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("perceptron-service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b2e7fbf907ca7a14ab3a21789f37935ade2c99a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c1fa6edd60d5f0475ff572ebe445e5aee02235d")]
 [assembly: System.Reflection.AssemblyProductAttribute("perceptron-service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("perceptron-service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
